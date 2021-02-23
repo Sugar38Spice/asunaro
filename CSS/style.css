@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+a {
+    text-decoration:none; 
+}
+
 header {
     font-family: "Noto Sans Japanese", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, "メイリオ", "Meiryo", "HGPｺﾞｼｯｸM", "Osaka", "ＭＳ Ｐゴシック", sans-serif, Century Gothic, Arial;
 	background: #F5F0D6;    /* 背景色 */
@@ -18,13 +22,16 @@ text-align: center;   /* 文字の中央揃え */
 }
 
 footer ul {
+	align-items: center;
 	width: 100%;
 	margin: 0 auto;
 	display: flex;
 	list-style: none;
+	background-color: #EEF2EF;
 }
 
 footer li {
+	align-items: center;
 	color: #acacac;
 	width: 33%;
 	line-height: 60px;
@@ -32,7 +39,7 @@ footer li {
 	/*メニューをホバーした時の変化時間*/
 }
 
-header li:hover {
+footer li:hover {
 	/*メニューをホバーしたときに色が変わる*/
 	color: #111;
 }
