@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="サイトをキーワードで説明">
+	<meta name="description" content="どんなサイトかを短い文章で説明">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1">
+    <title>ページタイトル</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+<h1>hello asunaro</h1>
+
+</body>
+</html>
+
+
+
+{% extends "base.html" %} 
+
+{% block content %}
+<h1>{{name}}さん、こんにちは</h1>
+<h2>できたこと</h2>
+<table border = "1px">
+    {% for task in task_list %}
+    <tr>
+        <td>ID:{{task.id}}</td>
+        <td>{{task.task}}</td>
+        <td><a href="/edit/{{task.id}}">編集</a></td>
+        
+    </tr>
+
+    {% endfor %}
+</table>
+<a href="myp.html"><button>戻る</button></a>
+<a href="/"><button>決定</button></a>
+    
+{% endblock %}
