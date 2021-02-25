@@ -85,6 +85,7 @@ text-align: center;   /* 文字の中央揃え */
 		border-radius:0.5em;    /*角丸*/
 		background:#F5F0D6;        /*背景色*/
 		text-align:center;      /*テキストの位置*/
+		font-weight: 900;		 /*テキストの幅*/
 		overflow:hidden;
 	}
 
@@ -94,7 +95,6 @@ text-align: center;   /* 文字の中央揃え */
 		color:#87BFC1;              /*文字の色*/
 		animation: flowing 6s linear infinite;    /*アニメーション*/
 		transform:translateY(-100%);              /*最初の位置*/
-		animation-iteration-count:1;
 	}
 
 	@keyframes flowing {
