@@ -79,7 +79,7 @@ text-align: center;   /* 文字の中央揃え */
   /* フッターメニューここまで */
 
   .box1{
-	width:500px;
+	width:80%;
 	height:300px;
 	background:#EEF2EF;
 	border-radius:30px;
