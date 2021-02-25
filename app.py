@@ -12,7 +12,13 @@ def top():
 
 @app.route("/login")
 def login_post():
-    return render_template("login.html")
+    conn = sqlite3.connect("asunaro.db")
+    c = conn.cursor()
+    c.execute("SELECT id , name , password FROM asunarostaff WHERE id = 1;")
+    user_info = c.fetchone()
+    print(user_info)
+    conn.close()
+    return render_template("login.html" )
     # user_name = request.form.get("user_name")
 #     password = request.form.get("password")
 #     conn = sqlite3.connect("task.db")
@@ -55,7 +61,7 @@ def staff_info():
 @app.route("/add" , methods= ["get"])
 def add_get():
     if "user_id" in session :
-        return render_template("add.html")
+        return render_template("growth.html")
     else:
         return  redirect("/login")
 
