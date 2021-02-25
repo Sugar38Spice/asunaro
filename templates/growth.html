@@ -14,5 +14,22 @@
 <body>
 <h1>hello asunaro</h1>
 
+<h1>タスク一覧</h1>
+<h2>{{user_id}}さん、こんにちは</h2>
+<table border= "1px">
+   
+    <tr>
+        <td>ID:{{task.id}}</td>
+        <td>内容:{{task.task}}</td>
+        <td><a href="/edit/{{task.id}}">編集</a></td>
+        <td><a href="/del/{{task.id}}">削除</a></td>
+    </tr>
+
+
+</table>
+<a href="/add">タスクを追加</a>
+<a href="/logout">ログアウト</a>
+
+
 </body>
 </html>
