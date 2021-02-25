@@ -1,9 +1,19 @@
 
-{% extends "base.html" %} 
-
-{% block content %}
 
 
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1">
+    <title>マイページ</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <!-- ここからJS -->
+    <script src="./js/jquery-3.5.1.min.js"></script>    <!-- jQuery -->
+    <script src="./js/common.js"></script>  <!-- Javascript  -->
+
+</head>
+<body>
 <h1>できたこと</h1>
 
 <form action="入力"></form>
@@ -12,4 +22,41 @@
 
 
 
-{% endblock %}
+
+<div class="container">
+	
+</div>
+</body>
+<!--フッターからログアウトするための仕掛け -->
+<script>
+	function confirmFunction1() {
+//ret変数に確認ダイアログの結果を代入する。
+ret = confirm("ログアウトしますか？");
+//確認ダイアログの結果がOKの場合外部リンクを開く
+if (ret == true){
+location.href = "login.html";
+}
+else {
+location.href = "myp.html";
+}
+
+}
+</script>
+<!-- ここまで -->
+
+	<!-- フッターメニュー -->
+
+	<div id="sp-fixed-menu" class="for-sp">
+		<ul>
+			<li><a href="post.html" >今日のあなたは</a></li>
+			<li><a href="growth.html">木の成長を見る</a></li>
+			<!-- ダイアログ出すために変更しました。 -->
+			<li><a onclick="confirmFunction1()">ログアウト</a></li>
+		</ul>
+	</div>
+	<!-- ここまで -->
+
+
+
+
+</html>
