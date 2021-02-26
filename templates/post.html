@@ -15,11 +15,43 @@
 <h1>hello asunaro</h1>
 <h2>今日のあなたは</h2>
 
-<form action="/add" method= "post">
-	<p>できたこと</p><input type="text" name= "task" maxlength= "100" size= "80">
-	<input type="submit">
-</form>
+<center>
+	<div class="box1"></div>
+	</div>
+	</center>
 
 
-</body>
+<!--フッターからログアウトするための仕掛け -->
+<script>
+	function confirmFunction1() {
+//ret変数に確認ダイアログの結果を代入する。
+ret = confirm("ログアウトしますか？");
+//確認ダイアログの結果がOKの場合外部リンクを開く
+if (ret == true){
+location.href = "login.html";
+}
+else {
+location.href = "myp.html";
+}
+}
+
+</script>
+
+
+
+
+
+
+ <!-- フッターメニュー -->
+
+<div id="sp-fixed-menu" class="for-sp">
+	<ul>
+		<li><a href="post.html" >今日のあなたは</a></li>
+		<li><a href="growth.html">木の成長を見る</a></li>
+		<li><a onclick="confirmFunction1()">ログアウト</a></li>
+	</ul>
+</div>
+
+<!-- ここまで -->
 </html>
+</body>
