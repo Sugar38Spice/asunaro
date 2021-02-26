@@ -73,7 +73,7 @@ text-align: center;   /* 文字の中央揃え */
 	
 	/*ログアウト 背景色*/
 	#sp-fixed-menu li:last-of-type{
-		background: #EEF2EF;main
+		background: #EEF2EF;
 	}
 
   /* フッターメニューここまで */
@@ -85,3 +85,4 @@ text-align: center;   /* 文字の中央揃え */
 	border-radius:30px;
 	border: 2px solid #87BFC1;  /* 枠線 */
   }
+
