@@ -10,5 +10,5 @@ def logout():
 
 
   if __name__ == "__main__":
-    # Flask が持っている開発用サーバーを、実行します。
+     Flask が持っている開発用サーバーを、実行します。
     app.run()
