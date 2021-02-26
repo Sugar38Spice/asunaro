@@ -113,7 +113,7 @@ def add():
     user_id = session['user_id']
 
     # 課題2の答えはここ 現在時刻を取得
-    time = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+    time = datetime.now().strftime('%m/%d')
 
     # POSTアクセスならDBに登録する
     # フォームから入力されたアイテム名の取得(Python2ならrequest.form.getを使う)
