@@ -8,9 +8,12 @@ app = Flask(__name__)
 @app.route("/")
 def top():
     return render_template("index.html")
-    return  redirect("/login")
 
-@app.route("/login")
+@app.route("/",methods=["POST"])
+def move_login():
+    return render_template("login.html")
+
+@app.route("/login.html")
 def login_post():
     conn = sqlite3.connect("asunaro.db")
     c = conn.cursor()
@@ -58,28 +61,29 @@ def staff_info():
     conn.close()
     return  render_template("growth.html",html_staff = user_info)  
 
-@app.route("/add" , methods= ["get"])
+@app.route("/add" , methods= ["GET"])
 def add_get():
     if "user_id" in session :
         return render_template("growth.html")
     else:
         return  redirect("/login")
 
-@app.route("/add" , methods= ["post"])
+@app.route("/add" , methods= ["POST"])
 def add_post():
-    if "user_id" in session :
-        user_id = session["user_id"]
-        task = request.form.get("task")
+    # if "user_id" in session :
+    # user_id = session["user_id"]
+    task = request.form.get("task")
 
-        conn = sqlite3.connect("task.db")
-        c = conn.cursor()
-        c.execute("INSERT INTO tasks VALUES(null, ?,?);" , (task,user_id))
-        conn.commit()
-        conn.close()
+    conn = sqlite3.connect("asunaro.db")
+    c = conn.cursor()
+    c.execute("INSERT INTO asunarostaff VALUES(null, ?,?,?);" , (task,user_id))
+    conn.commit()
+    conn.close()
 
-        return redirect("/list")
-    else:
-        return redirect("/login")
+    return "書き込み完了しました。えらい！"
+        # return redirect("/list")
+    # else:
+    #     return redirect("/login")
 
 @app.route("/list" )
 def task_list():
