@@ -78,6 +78,7 @@ text-align: center;   /* 文字の中央揃え */
 
   /* フッターメニューここまで */
 
+<<<<<<< HEAD
   .box1{
 	width:80%;
 	height:300px;
@@ -86,3 +87,76 @@ text-align: center;   /* 文字の中央揃え */
 	border: 2px solid #87BFC1;  /* 枠線 */
   }
 
+=======
+
+  /* テキスト入力フォーム */
+  @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+
+form { max-width:420px; margin:50px auto; }
+
+.feedback-input {
+  color:#74645C;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 18px;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color:#EEF2EF;
+  border:2px solid #87BFC1;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+
+.feedback-input:focus { border:2px solid #87BFC1; }
+
+textarea {
+  height: 150px;
+  line-height: 150%;
+  resize:vertical;
+}
+
+[type="submit"] {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  width: 100%;
+  background:#87BFC1;
+  border-radius:5px;
+  border:0;
+  cursor:pointer;
+  color:white;
+  font-size:24px;
+  padding-top:10px;
+  padding-bottom:10px;
+  transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+[type="submit"]:hover { background:#B0DBD4; }
+
+/* テキスト入力フォームここまで */
+
+
+/* 今日はお休みボタン */
+
+[type="zzz-btn"] {
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	width: 100%;
+	background:#B5D569;
+	border-radius:5px;
+	border:0;
+	cursor:pointer;
+	color:white;
+	font-size:24px;
+	padding-top:10px;
+	padding-bottom:10px;
+	transition: all 0.3s;
+	margin-top:-4px;
+	font-weight:700;
+  }
+  [type="zzz-btn"]:hover { background:#EDE795; }
+/* ここまで */
+>>>>>>> c97103102813e90be9d3c34b63c757908b61cc1f
