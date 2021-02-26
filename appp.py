@@ -16,62 +16,49 @@ from datetime import datetime
 def index():
     return render_template('index.html')
 
-# GET  /register => 登録画面を表示
-# POST /register => 登録処理をする
-@app.route('/myp',methods=["GET", "POST"])
-def register():
-    #  登録ページを表示させる
-    if request.method == "GET":
-        if 'user_id' in session :
-            return redirect ('/bbs')
-        else:
-            return render_template("myp.html")
-
-    # ここからPOSTの処理
-    else:
-        # 登録ページで登録ボタンを押した時に走る処理
-        name = request.form.get("name")
-        password = request.form.get("password")
-
-        conn = sqlite3.connect('style.db')
-        c = conn.cursor()
-        # 課題4の答えはここ
-        c.execute("insert into user values(null,?,?,)", (name,password))
-        conn.commit()
-        conn.close()
-        return redirect('/login')
-
-
 # GET  /login => ログイン画面を表示
 # POST /login => ログイン処理をする
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "GET":
-        if 'user_id' in session :
-            return redirect("/bbs")
-        else:
-            return render_template("login.html")
+@app.route("/login")
+def login_get():
+    
+    if "user_id" in session :
+        return redirect("/list")
     else:
-        # ブラウザから送られてきたデータを受け取る
-        name = request.form.get("name")
-        password = request.form.get("password")
+        return render_template("/login.html")
 
-        # ブラウザから送られてきた name ,password を userテーブルに一致するレコードが
-        # 存在するかを判定する。レコードが存在するとuser_idに整数が代入、存在しなければ nullが入る
-        conn = sqlite3.connect('style.db')
-        c = conn.cursor()
-        c.execute("select id from user where name = ? and password = ?", (name, password) )
-        user_id = c.fetchone()
-        conn.close()
-        # DBから取得してきたuser_id、ここの時点ではタプル型
-        print(type(user_id))
-        # user_id が NULL(PythonではNone)じゃなければログイン成功
-        if user_id is None:
-            # ログイン失敗すると、ログイン画面に戻す
-            return render_template("login.html")
-        else:
-            session['user_id'] = user_id[0]
-            return redirect("/bbs")
+@app.route("/login" , methods = ["post"])
+def login_post():
+    user_name = request.form.get("user_name")
+    password = request.form.get("password")
+    conn = sqlite3.connect("style.db")
+    c = conn.cursor()
+    
+    c.execute("SELECT id FROM users WHERE user_name = ? and password = ?" , (user_name, password))
+    user_id = c.fetchone()
+    #DB接続終了
+    conn.close()
+    #会員情報があればログイン、なければ表示される
+    if user_id is None:
+        return "ログイン情報が正しくありません"
+    else:
+        #user_id野中のデータだけ取りたいからインデックスで指定してsessionに代入
+        session["user_id"] = user_id[0]  
+         
+        return redirect("/list")
+
+
+# GET  /register => 登録画面を表示
+# POST /register => 登録処理をする
+@app.route('/myp')
+def register():
+    #  登録ページを表示させる  
+    return render_template("myp.html")
+
+@app.route('/zzz')
+def register2():
+    #  登録ページを表示させる  
+    return render_template("zzz.html")
+
 
 
 @app.route("/logout")
