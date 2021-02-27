@@ -6,8 +6,8 @@
 	<meta name="keywords" content="サイトをキーワードで説明">
 	<meta name="description" content="どんなサイトかを短い文章で説明">
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1">
-    <title>木の成長を見る</title>
-    <link rel="stylesheet" href="../static/growth.css">
+    <title>ページタイトル</title>
+    <link rel="stylesheet" href="CSS/style.css">
 	    <!-- ここからJS -->
 		<script src="./js/jquery-3.5.1.min.js"></script>    <!-- jQuery -->
 		<script src="./js/common.js"></script>  <!-- Javascript  -->
@@ -15,22 +15,24 @@
 <body>
 <h1>hello asunaro</h1>
 
-<!--フッターからログアウトするための仕掛け -->
-<script>
-	function confirmFunction1() {
-//ret変数に確認ダイアログの結果を代入する。
-ret = confirm("ログアウトしますか？");
-//確認ダイアログの結果がOKの場合外部リンクを開く
-if (ret == true){
-location.href = "login.html";
-}
-else {
-location.href = "myp.html";
-}
+<h1>タスク一覧</h1>
+<h2>{{user_id}}さん、こんにちは</h2>
+<table border= "1px">
+   
+    <tr>
+        <td>ID:{{task.id}}</td>
+        <td>内容:{{task.task}}</td>
+        <td><a href="/edit/{{task.id}}">編集</a></td>
+        <td><a href="/del/{{task.id}}">削除</a></td>
+    </tr>
 
-}
-</script>
 
+<<<<<<< HEAD
+</table>
+<a href="/add">タスクを追加</a>
+<a href="/logout">ログアウト</a>
+
+=======
 <!-- 画像サイズを画面幅に合わせる -->
 <p class="resizeimage">
 <img src="../img/IMG_0660.PNG" alt="成長した木のイラスト">
@@ -39,14 +41,7 @@ location.href = "myp.html";
 
 
 <!-- フッターメニュー -->
+>>>>>>> a1d8c42d8f9328daa17e19d6a2c232fbc82f60f3
 
-<div id="sp-fixed-menu" class="for-sp">
-	<ul>
-		<li><a href="post.html" >今日のあなたは</a></li>
-		<li><a href="growth.html">木の成長を見る</a></li>
-		<li><a onclick="confirmFunction1()">ログアウト</a></li>
-	</ul>
-</div>
-<!-- ここまで -->
 </body>
 </html>

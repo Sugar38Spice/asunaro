@@ -1,14 +1,222 @@
-from flask import Flask , render_template , request , redirect , session
+from flask import Flask , render_template ,request ,redirect ,session
+import sqlite3
 
 app = Flask(__name__)
 
-@app.route("/logout")
+# app.secret_key = "sunabacokoza"
+
+@app.route("/")
+def top():
+    return render_template("index.html")
+
+@app.route("/login")
+def move_login():
+    return render_template("login.html")
+
+@app.route("/login.html")
+def login_post():
+    conn = sqlite3.connect("asunaro.db")
+    c = conn.cursor()
+    c.execute("SELECT id , name , password FROM asunarostaff WHERE id = 1;")
+    user_info = c.fetchone()
+    print(user_info)
+    conn.close()
+    return render_template("login.html" )
+    # user_name = request.form.get("user_name")
+#     password = request.form.get("password")
+#     conn = sqlite3.connect("task.db")
+#     c = conn.cursor()
+#     c.execute("SELECT id FROM users WHERE user_name = ? and password = ?", (user_name, password) )
+#     user_id = c.fetchone()
+
+#     conn.close()
+
+#     if user_id is None:
+#         return "ログイン情報が正しくありません"
+#     else:
+#         session["user_id"] =user_id[0]
+#         return redirect("/list")
+
+
+@app.route("/myp")
+def my_page():
+    # py_name = "name"
+    return render_template("myp.html")
+    # return name + "さん、こんにちは"
+    # return render_template("myp.html", name = py_name)
+
+
+@app.route("/zzz")
+def zzz_page():
+    return render_template("zzz.html")
+
+@app.route("/grouth")
+def grouth_page():
+    return render_template("grouth.html")
+
+
+@app.route("/staff")
+def staff_info():
+    conn = sqlite3.connect("asunaro.db")
+    c = conn.cursor()
+    c.execute("SELECT id , name , password , message FROM asunarostaff WHERE id = ?;")
+    user_info = c.fetchone()
+    print(user_info)
+    conn.close()
+    return  render_template("growth.html",html_staff = user_info)  
+
+@app.route("/add" , methods= ["GET"])
+def add_get():
+    if "user_id" in session :
+        return render_template("growth.html")
+    else:
+        return  redirect("/login")
+
+@app.route("/add" , methods= ["POST"])
+def add_post():
+    # if "user_id" in session :
+    # user_id = session["user_id"]
+    task = request.form.get("task")
+
+    conn = sqlite3.connect("asunaro.db")
+    c = conn.cursor()
+    c.execute("INSERT INTO asunarostaff VALUES(null, ?,?,?);" , (task,user_id))
+    conn.commit()
+    conn.close()
+
+    return "書き込み完了しました。えらい！"
+        # return redirect("/list")
+    # else:
+    #     return redirect("/login")
+
+@app.route("/list" )
+def task_list():
+    if "user_id" in session :
+        user_id = session["user_id"]
+        conn = sqlite3.connect("task.db")
+        c = conn.cursor()
+        c.execute("SELECT * FROM tasks WHERE user_id = ?",(user_id,))
+        task_list = []
+        for task in c.fetchall():
+            task_list.append(
+                {"id":task[0],"task":task[1]}
+            )
+        conn.close()
+        return  render_template("task_list.html" , task_list = task_list, user_id = user_id)
+    else:
+        return  redirect("/login")
+
+@app.route("/edit/<id>" , methods = ["get"])
+def edit(id):
+    if "user_id" in session :
+        conn = sqlite3.connect("task.db")
+        c = conn.cursor()
+        c.execute("SELECT task FROM tasks where id = ?" , (id,))
+        task = c.fetchone()
+        print(task)
+        task = task[0]
+
+        py_task = {"dic_id":id, "dic_task":task}
+        conn.close()
+        return  render_template("edit.html" ,html_task = py_task)
+    else:
+        return  redirect("/login")
+
+@app.route("/edit" , methods =["post"])
+def edit_post():
+    if "user_id" in session :
+        task_id = request.form.get("task_id")
+        task_id = int(task_id)
+        task_input = request.form.get("task_input")
+        conn = sqlite3.connect("task.db")
+        c = conn.cursor()
+        c.execute("UPDATE tasks SET task = ? WHERE id = ?", (task_input,task_id))
+        conn.commit()
+        conn.close()
+        return redirect("/list")
+    else:
+        return  redirect("/login")
+
+@app.route("/del/<id>")
+def del_task(id):
+    if "user_id" in session :
+        conn = sqlite3.connect("task.db")
+        c = conn.cursor()
+        c.execute("DELETE FROM tasks WHERE id = ?", (id,))
+        conn.commit()
+        conn.close()
+        return redirect("/list")
+    else:
+        return  redirect("regist.html")
+
+@app.route("/regist", methods =["get"])
+def regist_get():
+    if "user_id" in session :
+        return render_template("/list")
+    else:
+        return  render_template("regist.html")
+
+@app.route("/regist", methods =["post"])
+def regist_post():
+    if "user_id" in session :
+        user_name = request.form.get("user_name")
+        password = request.form.get("password")
+        conn = sqlite3.connect("task.db")
+        c = conn.cursor()
+        c.execute("insert into users values(null,?,?)", (user_name, password) )
+        conn.commit()
+        conn.close()
+        return "登録が完了しました！"
+    else:
+        return  render_template("/login")
+
+# @app.route("/login", methods =["get"])
+# def login_post():
+#     if "user_id" in session :    
+#         return redirect("/list")
+#     else:
+#         return  redirect("/login")
+
+# @app.route("/login", methods =["post"])
+# def login_posting():
+#     user_name = request.form.get("user_name")
+#     password = request.form.get("password")
+#     conn = sqlite3.connect("task.db")
+#     c = conn.cursor()
+#     c.execute("SELECT id FROM users WHERE user_name = ? and password = ?", (user_name, password) )
+#     user_id = c.fetchone()
+
+#     conn.close()
+
+#     if user_id is None:
+#         return "ログイン情報が正しくありません"
+#     else:
+#         session["user_id"] =user_id[0]
+#         return redirect("/list")
+
+@app.route("/logout", methods =["get"])
 def logout():
-    session.pop('user_id',None)
-    # ログアウト後はログインページにリダイレクトさせる
-    return redirect("/login")
+    session.pop("user_id",None)
+    return  render_template("login.html")
 
 
+
+
+
+
+
+@app.errorhandler(404)
+def notfound(code):
+    return "404エラーです。このページはすでに消されてしまったか存在していません。"
+
+
+
+
+<<<<<<< HEAD
+if __name__ == "__main__":
+    app.run(debug=True)
+=======
   if __name__ == "__main__":
      Flask が持っている開発用サーバーを、実行します。
     app.run()
+>>>>>>> a1d8c42d8f9328daa17e19d6a2c232fbc82f60f3
