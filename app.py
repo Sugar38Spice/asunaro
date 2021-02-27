@@ -13,9 +13,7 @@ def index():
 
 
 
-@app.route("/login",methods=["POST"])
-def move_login():
-    return render_template("login.html")
+
 
 @app.route("/login")
 def login_post():
