@@ -9,7 +9,7 @@ app = Flask(__name__)
 def top():
     return render_template("index.html")
 
-@app.route("/login")
+@app.route("/",methods=["POST"])
 def move_login():
     return render_template("login.html")
 
@@ -39,20 +39,16 @@ def login_post():
 
 
 @app.route("/myp")
-def my_page():
-    # py_name = "name"
-    return render_template("myp.html")
+def template():
+    py_name = "name"
     # return name + "さん、こんにちは"
-    # return render_template("myp.html", name = py_name)
+    return render_template("myp.html", name = py_name)
 
 
-@app.route("/zzz")
-def zzz_page():
-    return render_template("zzz.html")
-
-@app.route("/grouth")
-def grouth_page():
-    return render_template("grouth.html")
+# @app.route("/temptest")
+# def temptest():
+#     py_name = "にんじゃわんこ"
+#     return  render_template("index.html", user_name = py_name)
 
 
 @app.route("/staff")
@@ -205,6 +201,7 @@ def logout():
 
 
 
+
 @app.errorhandler(404)
 def notfound(code):
     return "404エラーです。このページはすでに消されてしまったか存在していません。"
@@ -212,11 +209,5 @@ def notfound(code):
 
 
 
-<<<<<<< HEAD
 if __name__ == "__main__":
     app.run(debug=True)
-=======
-  if __name__ == "__main__":
-     Flask が持っている開発用サーバーを、実行します。
-    app.run()
->>>>>>> a1d8c42d8f9328daa17e19d6a2c232fbc82f60f3
