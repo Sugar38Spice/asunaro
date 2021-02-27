@@ -212,5 +212,11 @@ def notfound(code):
 
 
 
+<<<<<<< HEAD
 if __name__ == "__main__":
     app.run(debug=True)
+=======
+  if __name__ == "__main__":
+     Flask が持っている開発用サーバーを、実行します。
+    app.run()
+>>>>>>> a1d8c42d8f9328daa17e19d6a2c232fbc82f60f3
