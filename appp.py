@@ -202,32 +202,6 @@ def regist_post():
     return "登録が完了しました"
   
 
-@app.route("/login" , methods =["get"])
-def login_get():
-    if "user_id" in session :
-        return redirect("/list")
-    else:
-        return render_template("/login.html")
-
-@app.route("/login" , methods = ["post"])
-def login_post():
-    user_name = request.form.get("user_name")
-    password = request.form.get("password")
-    conn = sqlite3.connect("style.db")
-    c = conn.cursor()
-    
-    c.execute("SELECT id FROM users WHERE user_name = ? and password = ?" , (user_name, password))
-    user_id = c.fetchone()
-    #DB接続終了
-    conn.close()
-    #会員情報があればログイン、なければ表示される
-    if user_id is None:
-        return "ログイン情報が正しくありません"
-    else:
-        #user_id野中のデータだけ取りたいからインデックスで指定してsessionに代入
-        session["user_id"] = user_id[0]  
-         
-        return redirect("/list")
 
 @app.route("/logout")
 def logput():
