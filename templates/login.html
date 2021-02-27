@@ -13,6 +13,21 @@
 </head>
 <body>
 <h1>ログイン</h1>
+<form>
+	Name <input type="text" name="name"><br>
+	Pass <input type="password" name="password"><br>
+</form>
+
+
+
+
+<a href="myp.html"><button>次へ</button></a>
+
+
+
+
+{% extends 'base.html' %}
+{% block content %}
 
 <form action="/login" method="post">
   名前：<input type="text" name="name"><br>

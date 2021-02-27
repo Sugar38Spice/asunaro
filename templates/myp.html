@@ -5,16 +5,19 @@
 <html lang="jp">
 <head>
 	<meta charset="utf-8">
+	<meta name="keywords" content="サイトをキーワードで説明">
+	<meta name="description" content="どんなサイトかを短い文章で説明">
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1">
-    <title>マイページ</title>
-    <link rel="stylesheet" href="../static/myp.css">
+    <title>ページタイトル</title>
+    <link rel="stylesheet" href="CSS/style.css">
     <!-- ここからJS -->
     <script src="./js/jquery-3.5.1.min.js"></script>    <!-- jQuery -->
     <script src="./js/common.js"></script>  <!-- Javascript  -->
 
 </head>
 <body>
-<h1>できたこと</h1>
+<h1>hello asunaro</h1>
+<p>{{name}}さん、こんにちは</p>
 
 
 <form action="入力"></form>
@@ -48,17 +51,16 @@ location.href = "myp.html";
 </script>
 <!-- ここまで -->
 
+<footer>
 	<!-- フッターメニュー -->
-
-	<div id="sp-fixed-menu" class="for-sp">
-		<ul>
-			<li><a href="post.html" >今日のあなたは</a></li>
-			<li><a href="growth.html">木の成長を見る</a></li>
-			<!-- ダイアログ出すために変更しました。 -->
-			<li><a onclick="confirmFunction1()">ログアウト</a></li>
-		</ul>
-	</div>
+	<ul  id="footer-menu">
+		<li><a href="post.html">今日のあなたは</a></li>
+		<li><a href="growth.html">木の成長を見る</a></li>
+		<li><a href="logout.html">ログアウト</a></li>
+	</ul>
 	<!-- ここまで -->
+		
+</footer>
 
 
 
