@@ -3,17 +3,19 @@ import sqlite3
 
 app = Flask(__name__)
 
-# app.secret_key = "sunabacokoza"
+app.secret_key = "sunabacokoza"
+
+from datetime import datetime
 
 @app.route("/")
-def top():
+def index():
     return render_template("index.html")
 
-@app.route("/",methods=["POST"])
+@app.route("/login",methods=["POST"])
 def move_login():
     return render_template("login.html")
 
-@app.route("/login.html")
+@app.route("/login")
 def login_post():
     conn = sqlite3.connect("asunaro.db")
     c = conn.cursor()
@@ -44,7 +46,10 @@ def template():
     # return name + "さん、こんにちは"
     return render_template("myp.html", name = py_name)
 
-
+@app.route('/zzz')
+def register2():
+    #  登録ページを表示させる  
+    return render_template("zzz.html")
 # @app.route("/temptest")
 # def temptest():
 #     py_name = "にんじゃわんこ"
