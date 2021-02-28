@@ -117,3 +117,9 @@ text-align: center;   /* 文字の中央揃え */
 	animation-delay: .3s;
   }
   /* マウスオーバーで文字が動くCSSここまで */
+
+img {
+	width:350px;
+	height:250px;
+}
+	
