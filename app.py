@@ -86,9 +86,7 @@ def add_post():
     # DB接続終了
     conn.close()
     return "書き込み完了しました。えらい！"
-#         # return redirect("/list")
-    # else:
-    #     return redirect("/login")
+
 
 @app.route("/list" )
 def task_list():
