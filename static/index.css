@@ -77,3 +77,43 @@ text-align: center;   /* 文字の中央揃え */
 	}
 
   /* フッターメニューここまで */
+
+
+/* マウスオーバーでアスナロの文字が動くCSS */
+@keyframes wave {
+	100% {
+	  transform: translate3d(0, -10px, 0);
+	}
+  }
+  
+  .wave {
+	display: block;
+
+	text-align: center;
+  }
+  
+  .wave span {
+	display: inline-block;
+	color: #B5D569;
+	font-size: 2em;
+  }
+  
+  .wave:hover span {
+	animation-name: wave;
+	animation-duration: .2s;
+	animation-direction: alternate;
+	animation-iteration-count: 2;
+  }
+  
+  .wave:hover span:nth-child(2) {
+	animation-delay: .1s;
+  }
+  
+  .wave:hover span:nth-child(3) {
+	animation-delay: .2s;
+  }
+  
+  .wave:hover span:nth-child(4) {
+	animation-delay: .3s;
+  }
+  /* マウスオーバーで文字が動くCSSここまで */
