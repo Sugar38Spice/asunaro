@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="サイトをキーワードで説明">
+	<meta name="description" content="どんなサイトかを短い文章で説明">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1">
+    <title>ページタイトル</title>
+    <link rel="stylesheet" href="../static/edit.css">
+	    <!-- ここからJS -->
+		<script src="./js/jquery-3.5.1.min.js"></script>    <!-- jQuery -->
+		<script src="./js/common.js"></script>  <!-- Javascript  -->
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+<h1>投稿内容の編集</h1>
+
+    <form action="/edit" method= "post">
+        名前<input type="hidden" name= "post_id" value="{{html_task.dic_id}}">
+        内容<input type="text" name= "post_input" maxlength= "100" size= "80"  placeholder="ここに変更内容を記入してください">
+        <input type="submit" value="変更するyo">
+   </form>
+
+
+
+
+
+
+
+
+
+ <!-- フッターメニュー -->
+
+    <div id="sp-fixed-menu" class="for-sp">
+        <ul>
+            <li><a onclick="confirmFunction1()">ログアウト</a></li>
+            <li><a href="post.html" >今日のあなたは</a></li>
+            <li><a href="myp.html">マイページ</a></li>
+        </ul>
+    </div>
+
+<!-- ここまで -->
+
+</body>
+</html>
