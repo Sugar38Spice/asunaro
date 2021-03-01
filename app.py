@@ -66,29 +66,27 @@ def staff_info():
     conn.close()
     return  render_template("growth.html",html_staff = user_info)  
 
-@app.route("/add" , methods= ["GET"])
-def add_get():
-    if "user_id" in session :
-        return render_template("growth.html")
-    else:
-        return  redirect("/login")
+# 投稿ページ
+@app.route("/post" , methods= ["GET"])
+def post_get():
+        return render_template("post.html")
 
-@app.route("/add" , methods= ["POST"])
+# どんな情報をとるの
+@app.route("/post" , methods= ["POST"])
 def add_post():
-    # if "user_id" in session :
-    # user_id = session["user_id"]
-    task = request.form.get("task")
-
+    # text.areaから投稿内容を取得
+    posting = request.form.get("posting")  
+    # 投稿内容を保存するDBを指定
     conn = sqlite3.connect("asunaro.db")
     c = conn.cursor()
-    c.execute("INSERT INTO asunarostaff VALUES(null, ?,?,?);" , (task,user_id))
+    # SQL文で情報（ID,投稿内容,日時,ユーザーID）を取得
+    c.execute('INSERT INTO posts_test VALUES(null,?);' , (posting,))
+    # 投稿完了(悲観ロックなので)
     conn.commit()
+    # DB接続終了
     conn.close()
-
     return "書き込み完了しました。えらい！"
-        # return redirect("/list")
-    # else:
-    #     return redirect("/login")
+
 
 @app.route("/list" )
 def task_list():
