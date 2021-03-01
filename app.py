@@ -85,7 +85,7 @@ def add_post():
     conn.commit()
     # DB接続終了
     conn.close()
-    return "書き込み完了しました。えらい！"
+    return redirect("/list")
 
 # growth.htmlの投稿一覧
 @app.route("/list" )
@@ -123,11 +123,7 @@ def edit(id):
 
 @app.route("/edit" , methods =["post"])
 def edit_post():
-    if "user_id" in session :
-        task_id = request.form.get("task_id")
-        task_id = int(task_id)
-        task_input = request.form.get("task_input")
-        conn = sqlite3.connect("task.db")
+        conn = sqlite3.connect("asunaro.db")
         c = conn.cursor()
         c.execute("UPDATE tasks SET task = ? WHERE id = ?", (task_input,task_id))
         conn.commit()
