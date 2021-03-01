@@ -11,7 +11,7 @@ from datetime import datetime
 def index():
     return render_template("index.html")
 
-# ページ遷移
+# index→loginページ遷移
 @app.route("/login",methods=["POST"])
 def login():
     return redirect("/login")
