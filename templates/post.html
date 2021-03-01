@@ -14,10 +14,23 @@
 <body>
 <br>
 
-			<form>      
-				<textarea name="今日のあなたは？" class="feedback-input" placeholder="今日のあなたはなにをしたの？(20字以内)" maxlength="20"></textarea>
-				<input type="submit" value="できた！"/>
-			  </form>
+<script>
+	function confirmFunction0() {
+//ret変数に確認ダイアログの結果を代入する。
+ret = confirm("投稿しますか？");}
+if (ret == true){
+}
+else {
+location.href = "myp.html";
+}
+
+</script>
+
+<!-- 投稿フォーム -->
+			<form action="/post" method="POST">      
+				<textarea name="posting" class="feedback-input" placeholder="今日のあなたはなにをしたの？(20字以内)" maxlength="20"></textarea>
+				<input type ="submit" value	="できた！"onclick="confirmFunction0()"/>
+			</form>
 
 
 			  <br><br>
@@ -52,9 +65,9 @@ location.href = "myp.html";
 
 <div id="sp-fixed-menu" class="for-sp">
 	<ul>
-		<li><a href="post.html" >今日のあなたは</a></li>
-		<li><a href="growth.html">木の成長を見る</a></li>
 		<li><a onclick="confirmFunction1()">ログアウト</a></li>
+		<li><a href="post.html" >今日のあなたは</a></li>
+		<li><a href="myp.html">マイページ</a></li>
 	</ul>
 </div>
 

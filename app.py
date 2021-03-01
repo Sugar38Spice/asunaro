@@ -11,9 +11,13 @@ from datetime import datetime
 def index():
     return render_template("index.html")
 
+# ページ遷移
 @app.route("/login",methods=["POST"])
-def move_login():
-    return render_template("login.html")
+def login():
+    return redirect("/login")
+
+
+
 
 @app.route("/login")
 def login_post():
@@ -66,46 +70,44 @@ def staff_info():
     conn.close()
     return  render_template("growth.html",html_staff = user_info)  
 
-@app.route("/add" , methods= ["GET"])
-def add_get():
-    if "user_id" in session :
-        return render_template("growth.html")
-    else:
-        return  redirect("/login")
+# 投稿ページ
+@app.route("/post" , methods= ["GET"])
+def post_get():
+        return render_template("post.html")
 
-@app.route("/add" , methods= ["POST"])
+# どんな情報をとるの
+@app.route("/post" , methods= ["POST"])
 def add_post():
-    # if "user_id" in session :
-    # user_id = session["user_id"]
-    task = request.form.get("task")
-
+    # text.areaから投稿内容を取得
+    posting = request.form.get("posting")  
+    # 投稿内容を保存するDBを指定
     conn = sqlite3.connect("asunaro.db")
     c = conn.cursor()
-    c.execute("INSERT INTO asunarostaff VALUES(null, ?,?,?);" , (task,user_id))
+    # SQL文で情報（ID,投稿内容,日時,ユーザーID）を取得
+    c.execute('INSERT INTO posts_test VALUES(null,?);' , (posting,))
+    # 投稿完了(悲観ロックなので)
     conn.commit()
+    # DB接続終了
     conn.close()
-
     return "書き込み完了しました。えらい！"
-        # return redirect("/list")
-    # else:
-    #     return redirect("/login")
 
+# growth.htmlの投稿一覧
 @app.route("/list" )
-def task_list():
-    if "user_id" in session :
-        user_id = session["user_id"]
-        conn = sqlite3.connect("task.db")
-        c = conn.cursor()
-        c.execute("SELECT * FROM tasks WHERE user_id = ?",(user_id,))
-        task_list = []
-        for task in c.fetchall():
-            task_list.append(
-                {"id":task[0],"task":task[1]}
-            )
-        conn.close()
-        return  render_template("task_list.html" , task_list = task_list, user_id = user_id)
-    else:
-        return  redirect("/login")
+def posting_list():
+    conn = sqlite3.connect("asunaro.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM posts_test")
+    # 受け取ったデータの加工
+    post_list = [] #空箱作った
+    # postという関数作った
+    for post in c.fetchall():
+        post_list.append(
+            {"id":post[0],"posting":post[1]}
+        )
+    conn.close()
+    print(post_list)
+    return  render_template("growth.html", post_list = post_list)
+  
 
 @app.route("/edit/<id>" , methods = ["get"])
 def edit(id):
