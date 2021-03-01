@@ -121,7 +121,7 @@ def edit(id):
         conn.close()
         return  render_template("edit.html" ,html_task = py_task)
     else:
-        return  redirect("/login")
+        return  redirect("/html")
 
 @app.route("/edit" , methods =["post"])
 def edit_post():
