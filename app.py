@@ -87,23 +87,23 @@ def add_post():
     conn.close()
     return "書き込み完了しました。えらい！"
 
-
+# growth.htmlの投稿一覧
 @app.route("/list" )
-def task_list():
-    if "user_id" in session :
-        user_id = session["user_id"]
-        conn = sqlite3.connect("task.db")
-        c = conn.cursor()
-        c.execute("SELECT * FROM tasks WHERE user_id = ?",(user_id,))
-        task_list = []
-        for task in c.fetchall():
-            task_list.append(
-                {"id":task[0],"task":task[1]}
-            )
-        conn.close()
-        return  render_template("task_list.html" , task_list = task_list, user_id = user_id)
-    else:
-        return  redirect("/login")
+def posting_list():
+    conn = sqlite3.connect("asunaro.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM posts_test")
+    # 受け取ったデータの加工
+    post_list = [] #空箱作った
+    # postという関数作った
+    for post in c.fetchall():
+        post_list.append(
+            {"id":post[0],"posting":post[1]}
+        )
+    conn.close()
+    print(post_list)
+    return  render_template("growth.html", post_list = post_list)
+  
 
 @app.route("/edit/<id>" , methods = ["get"])
 def edit(id):
