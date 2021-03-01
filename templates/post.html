@@ -26,9 +26,9 @@ location.href = "myp.html";
 
 </script>
 
-
-			<form>      
-				<textarea name="今日のあなたは？" class="feedback-input" placeholder="今日のあなたはなにをしたの？(20字以内)" maxlength="20"></textarea>
+<!-- 投稿フォーム -->
+			<form action="/post" method="POST">      
+				<textarea name="posting" class="feedback-input" placeholder="今日のあなたはなにをしたの？(20字以内)" maxlength="20"></textarea>
 				<input type ="submit" value	="できた！"onclick="confirmFunction0()"/>
 			</form>
 
