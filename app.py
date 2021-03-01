@@ -14,7 +14,7 @@ def index():
 # ページ遷移
 @app.route("/login",methods=["POST"])
 def login():
-    return render_template("login.html")
+    return redirect("/login")
 
 
 
