@@ -14,20 +14,12 @@
 <body>
 <br>
 
-<script>
-	function alertFunction0() {
-//ret変数に確認ダイアログの結果を代入する。
-ret = alert("投稿しますか？");}
-if (ret == true){
-}
 
-
-</script>
 
 <!-- 投稿フォーム -->
 			<form action="/post" method="POST">      
 				<textarea name="posting" class="feedback-input" placeholder="今日のあなたはなにをしたの？(20字以内)" maxlength="20"></textarea>
-				<input type ="submit" value	="できた！"onclick="alertFunction0()"/>
+				<input type ="submit" value	="できた！"/>
 			</form>
 
 
@@ -45,10 +37,10 @@ if (ret == true){
 ret = confirm("ログアウトしますか？");
 //確認ダイアログの結果がOKの場合外部リンクを開く
 if (ret == true){
-location.href = "login.html";
+location.href = "/logout";
 }
 else {
-location.href = "myp.html";
+location.href = "/myp";
 }
 }
 
