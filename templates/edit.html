@@ -25,9 +25,9 @@
 <h1>投稿内容の編集</h1>
 
     <form action="/edit" method= "post">
-        名前<input type="hidden" name= "post_id" value="{{html_task.dic_id}}">
-        内容<input type="text" name= "post_input" maxlength= "100" size= "80"  placeholder="ここに変更内容を記入してください">
-        <input type="submit" value="変更するyo">
+        名前<input type="text" name= "post_id" value="{{html_task.dic_id}}">
+        内容<input type="text" name= "post_input" maxlength= "100" size= "80" value="{{html_task.dic_task}}" >
+        <input type="submit" value="変更する">
    </form>
 
 
