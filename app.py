@@ -11,35 +11,12 @@ from datetime import datetime
 def index():
     return render_template("index.html")
 
-
-
-
-
-
-
-# ページ遷移
+# index→loginページ遷移
 @app.route("/login",methods=["POST"])
 def login():
     return redirect("/login")
 
 
-
-
-
-
-# splite3をimportする
-import sqlite3
-# flaskをimportしてflaskを使えるようにする
-from flask import Flask , render_template , request , redirect , session 
-# appにFlaskを定義して使えるようにしています。Flask クラスのインスタンスを作って、 app という変数に代入しています。
-app = Flask(__name__)
-
-# Flask では標準で Flask.secret_key を設定すると、sessionを使うことができます。この時、Flask では session の内容を署名付きで Cookie に保存します。
-app.secret_key = 'sunabakoza'
-
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 
 @app.route('/new',methods=["GET", "POST"])
@@ -49,6 +26,9 @@ def new():
             return redirect ('/myp')
         else:
             return render_template("new.html")
+
+    #print(name)
+    #print(password)        
 
     else:
         name = request.form.get("name")
@@ -66,31 +46,13 @@ def new():
 #ここからコピペ
 # GET  /register => 登録画面を表示
 # POST /register => 登録処理をする
-@app.route('/index',methods=["GET", "POST"])
-def register():
-    #  登録ページを表示させる
-    if request.method == "GET":
-        if 'asunarostaff_id' in session :
-            return redirect ('/new')
-        else:
-            return render_template("index.html")
-    # ここからPOSTの処理
-    else:
-        name = request.form.get("name")
-        password = request.form.get("password")
 
-        conn = sqlite3.connect('asunaro.db')
-        c = conn.cursor()
-        c.execute("select id from asunarostaff where name = ? and password = ?" , (name, password) )
-        user_id = c.fetchone()
-        conn.close()
-        return redirect('/login')
 
 
 # GET  /login => ログイン画面を表示
 # POST /login => ログイン処理をする
 @app.route("/login", methods=["GET", "POST"])
-def login():
+def login2():
     if request.method == "GET":
         if 'asunarostaff_id' in session :
             return redirect("/myp")
