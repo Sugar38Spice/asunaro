@@ -170,7 +170,7 @@ def add_post():
     conn.commit()
     # DB接続終了
     conn.close()
-    return "書き込み完了しました。えらい！"
+    return redirect("/list")
 
 # growth.htmlの投稿一覧
 @app.route("/list" )
@@ -189,49 +189,48 @@ def posting_list():
     print(post_list)
     return  render_template("growth.html", post_list = post_list)
   
-
-@app.route("/edit/<id>" , methods = ["get"])
+#投稿内容の編集
+@app.route("/edit/<id>" , methods=["GET"])
 def edit(id):
-    if "user_id" in session :
-        conn = sqlite3.connect("task.db")
-        c = conn.cursor()
-        c.execute("SELECT task FROM tasks where id = ?" , (id,))
-        task = c.fetchone()
-        print(task)
-        task = task[0]
+    conn = sqlite3.connect("asunaro.db")
+    c = conn.cursor()
+    # SQL文を実行してデータの参照
+    c.execute("select posting from posts_test where id =?", (id,))
+    task = c.fetchone()
+    print(task) #このprintは任意、taskの中身の確認用
+    task = task[0]
 
-        py_task = {"dic_id":id, "dic_task":task}
-        conn.close()
-        return  render_template("edit.html" ,html_task = py_task)
-    else:
-        return  redirect("/html")
+    py_task = {"dic_id":id,"dic_task":task}
+    conn.close()
+    return render_template("edit.html" ,html_task = py_task)
+
 
 @app.route("/edit" , methods =["post"])
 def edit_post():
-    if "user_id" in session :
-        task_id = request.form.get("task_id")
-        task_id = int(task_id)
-        task_input = request.form.get("task_input")
-        conn = sqlite3.connect("task.db")
+        #フォームで編集された内容を受け取る
+        task_id = request.form.get("post_id") #id
+        task_id = int(task_id) #idを型変換するyo
+        task_input = request.form.get("post_input") #タスクの変更後の内容
+        conn = sqlite3.connect("asunaro.db")
         c = conn.cursor()
-        c.execute("UPDATE tasks SET task = ? WHERE id = ?", (task_input,task_id))
+        #2:37
+        c.execute("UPDATE posts_test SET posting = ? WHERE id = ?", (task_input,task_id))
         conn.commit()
         conn.close()
         return redirect("/list")
-    else:
-        return  redirect("/login")
+    # else:
+    #     return  redirect("/login")
 
 @app.route("/del/<id>")
 def del_task(id):
-    if "user_id" in session :
-        conn = sqlite3.connect("task.db")
+        conn = sqlite3.connect("asunaro.db")
         c = conn.cursor()
-        c.execute("DELETE FROM tasks WHERE id = ?", (id,))
+        c.execute("DELETE FROM posts_test WHERE id = ?", (id,))
         conn.commit()
         conn.close()
         return redirect("/list")
-    else:
-        return  redirect("regist.html")
+    # else:
+    #     return  redirect("regist.html")
 
 @app.route("/regist", methods =["get"])
 def regist_get():
