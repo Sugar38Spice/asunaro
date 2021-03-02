@@ -140,7 +140,7 @@ def edit_post():
 def del_task(id):
         conn = sqlite3.connect("asunaro.db")
         c = conn.cursor()
-        c.execute("DELETE FROM tasks WHERE id = ?", (id,))
+        c.execute("DELETE FROM posts_test WHERE id = ?", (id,))
         conn.commit()
         conn.close()
         return redirect("/list")
