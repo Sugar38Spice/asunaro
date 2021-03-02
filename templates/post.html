@@ -15,28 +15,26 @@
 <br>
 
 <script>
-	function confirmFunction0() {
+	function alertFunction0() {
 //ret変数に確認ダイアログの結果を代入する。
-ret = confirm("投稿しますか？");}
+ret = alert("投稿しますか？");}
 if (ret == true){
 }
-else {
-location.href = "myp.html";
-}
+
 
 </script>
 
 <!-- 投稿フォーム -->
 			<form action="/post" method="POST">      
 				<textarea name="posting" class="feedback-input" placeholder="今日のあなたはなにをしたの？(20字以内)" maxlength="20"></textarea>
-				<input type ="submit" value	="できた！"onclick="confirmFunction0()"/>
+				<input type ="submit" value	="できた！"onclick="alertFunction0()"/>
 			</form>
 
 
 			  <br><br>
 
 			  <!-- 今日はお休みボタン -->	 
-			  <a href="zzz.html" type="zzz-btn">    今日はお休み    </a>
+			  <a href="/zzz" type="zzz-btn">    今日はお休み    </a>
 			  <!-- ここまで -->
 
 
