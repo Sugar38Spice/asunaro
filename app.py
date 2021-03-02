@@ -42,18 +42,36 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/new',methods=["GET", "POST"])
+def new():
+    if request.method == "GET":
+        if 'asunarostaff_id' in session :
+            return redirect ('/myp')
+        else:
+            return render_template("new.html")
+
+    else:
+        name = request.form.get("name")
+        password = request.form.get("password")
+        conn = sqlite3.connect('asunaro.db')
+        c = conn.cursor()
+        c.execute("insert into asunarostaff values(null,?,?)", (name,password))
+        conn.commit()
+        conn.close()
+        return redirect('/myp')
+
 
 
 
 #ここからコピペ
 # GET  /register => 登録画面を表示
 # POST /register => 登録処理をする
-@app.route('/login',methods=["GET", "POST"])
+@app.route('/index',methods=["GET", "POST"])
 def register():
     #  登録ページを表示させる
     if request.method == "GET":
-        if 'user_id' in session :
-            return redirect ('/myp')
+        if 'asunarostaff_id' in session :
+            return redirect ('/new')
         else:
             return render_template("index.html")
     # ここからPOSTの処理
@@ -63,8 +81,8 @@ def register():
 
         conn = sqlite3.connect('asunaro.db')
         c = conn.cursor()
-        c.execute("insert into user values(null,?,?)", (name,password))
-        conn.commit()
+        c.execute("select id from asunarostaff where name = ? and password = ?" , (name, password) )
+        user_id = c.fetchone()
         conn.close()
         return redirect('/login')
 
@@ -74,7 +92,7 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-        if 'user_id' in session :
+        if 'asunarostaff_id' in session :
             return redirect("/myp")
         else:
             return render_template("login.html")
@@ -87,22 +105,23 @@ def login():
         # 存在するかを判定する。レコードが存在するとuser_idに整数が代入、存在しなければ nullが入る
         conn = sqlite3.connect('asunaro.db')
         c = conn.cursor()
-        c.execute("select id from user where name = ? and password = ?", (name, password) )
+        c.execute("select id from asunarostaff where name = ? and password = ?", (name, password) )
         user_id = c.fetchone()
         conn.close()
-
+        
+        #print(type(asunarostaff_id))
         # user_id が NULL(PythonではNone)じゃなければログイン成功
         if user_id is None:
             # ログイン失敗すると、ログイン画面に戻す
             return render_template("login.html")
         else:
-            session['user_id'] = user_id[0]
-            return redirect("/index.html")
+            session['asunarostaff_id'] = user_id[0]
+            return redirect("index.html")
 
 
 @app.route("/logout")
 def logout():
-    session.pop('user_id',None)
+    session.pop('asunarostaff_id',None)
     # ログアウト後はログインページにリダイレクトさせる
     return redirect("/login")
 
@@ -297,8 +316,12 @@ def regist_post():
 #         session["user_id"] =user_id[0]
 #         return redirect("/list")
 
-@app.route("/logout", methods =["get"])
-def logout():
+
+
+
+
+#@app.route("/logout", methods =["get"])
+#def logout():
     session.pop("user_id",None)
     return  render_template("login.html")
 
