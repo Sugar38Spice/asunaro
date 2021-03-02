@@ -19,9 +19,9 @@
 <table border= "1px">
    {% for post in post_list %}
     <tr>
-        <td>ID:{{post.id}}</td>
-		<td>内容:{{post.posting}}</td>
-		<td><a href="/list/{{post.id}}">編集</a></td>
+        <td>{{post.id}}</td> 
+		<td>{{post.posting}}</td>
+		<td><a href="/edit/{{post.id}}">編集</a></td>
         <td><a href="/del/{{post.id}}">削除</a></td>
        
     </tr>
@@ -57,9 +57,9 @@ location.href = "myp.html";
 
 <div id="sp-fixed-menu" class="for-sp">
 	<ul>
+		<li><a onclick="confirmFunction1()">ログアウト</a></li>
 		<li><a href="post.html" >今日のあなたは</a></li>
 		<li><a href="myp.html">マイページ</a></li>
-		<li><a onclick="confirmFunction1()">ログアウト</a></li>
 	</ul>
 </div>
 

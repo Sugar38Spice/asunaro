@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+a {
+    text-decoration:none; 
+}
+
+header {
+    font-family: "Noto Sans Japanese", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, "メイリオ", "Meiryo", "HGPｺﾞｼｯｸM", "Osaka", "ＭＳ Ｐゴシック", sans-serif, Century Gothic, Arial;
+	background: #F5F0D6;    /* 背景色 */
+    color: #74645C;     /* 文字色 */
+	text-align: center;   /* 文字の中央揃え */
+}
+
+body {
+/* フォントの指定 ゴシック体 ※やさしさゴシックは別途フォントデータのDLが必要なフォントのため、やわらかい印象のゴシック体を並べています */
+	font-family: "Noto Sans Japanese", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, "メイリオ", "Meiryo", "HGPｺﾞｼｯｸM", "Osaka", "ＭＳ Ｐゴシック", sans-serif, Century Gothic, Arial;
+/* フォントの指定ここまで */
+
+background: #F5F0D6;    /* 背景色 */
+color: #74645C;     /* 文字色 */
+text-align: center;   /* 文字の中央揃え */
+}
+
+/* フッターメニューCSSここから */
+	/*メニューをページ下部に固定*/
+	#sp-fixed-menu{
+		position: fixed;
+		width: 100%;
+		bottom: 0px;
+		font-size: 0;
+		opacity: 0.9;
+		z-index: 99;
+	}
+	
+	/*メニューを横並びにする*/
+	#sp-fixed-menu ul{
+		display: flex;
+		list-style: none;
+		padding:0;
+		margin:0;
+		width:100%;
+	}
+	
+	#sp-fixed-menu li{
+		justify-content: center;
+		align-items: center;
+		width: 50%;
+		padding:0;
+		margin:0;
+		font-size: 14px;
+		font-weight: 900;
+		border-right: 1px solid #fff;
+	}
+
+	/*ボタンを調整*/
+	#sp-fixed-menu li a{
+		color: #74645C;
+		text-align: center;
+		display:block;
+		width: 100%;
+		padding:20px;
+	}
+	
+	/*きょうのあなたは？ 背景色*/
+	#sp-fixed-menu li:first-of-type{
+		background: #EEF2EF;
+	}
+
+	/*木の成長を見る 背景色*/
+	#sp-fixed-menu li:nth-of-type(2){
+		background: #EEF2EF;
+	}
+	
+	/*ログアウト 背景色*/
+	#sp-fixed-menu li:last-of-type{
+		background: #EEF2EF;main
+	}
+
+  /* フッターメニューここまで */
+
+  
+  /* テキスト入力フォーム */
+  /* @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+
+form { max-width:420px; margin:50px auto; }
+
+.feedback-input {
+  color:#74645C;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 18px;
+  border-radius: 5px; */
+  /* line-height: 22px;
+  background-color:#EEF2EF;
+  border:2px solid #87BFC1;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+
+.feedback-input:focus { border:2px solid #87BFC1; }
+
+textarea {
+  height: 150px;
+  line-height: 150%;
+  resize:vertical;
+} */
+/* 
+[type="submit"] {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  width: 100%;
+  background:#87BFC1;
+  border-radius:5px;
+  border:0;
+  cursor:pointer;
+  color:white;
+  font-size:24px;
+  padding-top:10px;
+  padding-bottom:10px;
+  transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+[type="submit"]:hover { background:#B0DBD4; } */
+
+/* テキスト入力フォームここまで */
+
+
+/* 今日はお休みボタン */
+
+[type="zzz-btn"] {
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	width: 100%;
+	background:#B5D569;
+	border-radius:5px;
+	border:0;
+	cursor:pointer;
+	color:white;
+	font-size:24px;
+	padding-top:10px;
+	padding-bottom:10px;
+	transition: all 0.3s;
+	margin-top:-4px;
+	font-weight:700;
+  }
+  [type="zzz-btn"]:hover { background:#EDE795; }
+/* ここまで */
