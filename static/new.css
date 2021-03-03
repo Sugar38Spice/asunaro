@@ -22,7 +22,7 @@ text-align: center;   /* 文字の中央揃え */
 font-size:30px;
 }
 
-button{
+ [type="new"] {
 	display: inline-block;
   max-width: 180px;
   text-align: left;
