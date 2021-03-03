@@ -80,12 +80,12 @@ def login2():
             session['asunarostaff_id'] = user_id[0]
             return redirect("index.html")
 
-
+#ログアウトしますか？
 @app.route("/logout")
 def logout():
     session.pop('asunarostaff_id',None)
     # ログアウト後はログインページにリダイレクトさせる
-    return redirect("/login")
+    return redirect("/")
 
 
 
