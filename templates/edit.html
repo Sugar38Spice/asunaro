@@ -22,7 +22,21 @@
         <input type="submit" value="変更する" class="submit_btn">
    </form>
 
+<!--フッターからログアウトするための仕掛け -->
+<script>
+	function confirmFunction1() {
+//ret変数に確認ダイアログの結果を代入する。
+ret = confirm("ログアウトしますか？");
+//確認ダイアログの結果がOKの場合外部リンクを開く
+if (ret == true){
+location.href = "/logout";
+}
+else {
+location.href = "/list";
+}
+}
 
+</script>
 
 
  <!-- フッターメニュー -->
@@ -31,7 +45,7 @@
         <ul>
             <li><a onclick="confirmFunction1()">ログアウト</a></li>
             <li><a href="/post" >今日のあなたは</a></li>
-            <li><a href="/myp">マイページ</a></li>
+            <li><a href="/list">マイページ</a></li>
         </ul>
     </div>
 
