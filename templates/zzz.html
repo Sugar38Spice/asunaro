@@ -56,10 +56,10 @@
 ret = confirm("ログアウトしますか？");
 //確認ダイアログの結果がOKの場合外部リンクを開く
 if (ret == true){
-location.href = "login.html";
+location.href = "/logout";
 }
 else {
-location.href = "myp.html";
+location.href = "/zzz";
 }
 }
 </script>
@@ -71,8 +71,10 @@ location.href = "myp.html";
 <div id="sp-fixed-menu" class="for-sp">
 	<ul>
 		<li><a onclick="confirmFunction1()">ログアウト</a></li>
-		<li><a href="post.html" >今日のあなたは</a></li>
-		<li><a href="myp.html">マイページ</a></li>
+		<li><a href="/post" >今日のあなたは</a></li>
+		<li><a href="/list">マイページ</a></li>
+	
+	
 	</ul>
 </div>
 
