@@ -23,7 +23,7 @@ def login():
 def new():
     if request.method == "GET":
         if 'asunarostaff_id' in session :
-            return redirect ('/myp')
+            return redirect ('/login')
         else:
             return render_template("new.html")
 
@@ -38,7 +38,7 @@ def new():
         c.execute("insert into asunarostaff values(null,?,?)", (name,password))
         conn.commit()
         conn.close()
-        return redirect('/myp')
+        return redirect('/login')
 
 
 
@@ -55,7 +55,7 @@ def new():
 def login2():
     if request.method == "GET":
         if 'asunarostaff_id' in session :
-            return redirect("/myp")
+            return redirect("/list")
         else:
             return render_template("login.html")
     else:
@@ -125,11 +125,7 @@ def logout():
 #         return redirect("/list")
 
 
-@app.route("/myp")
-def template():
-    py_name = "name"
-    # return name + "さん、こんにちは"
-    return render_template("myp.html", name = py_name)
+
 
 @app.route('/zzz')
 def register2():
