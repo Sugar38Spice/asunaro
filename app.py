@@ -215,7 +215,7 @@ def edit(id):
 def edit_post():
         #フォームで編集された内容を受け取る
         task_id = request.form.get("post_id") #id
-        task_id = int(task_id) #idを型変換するyo
+        task_id = int(task_id) #idを型変換
         task_input = request.form.get("post_input") #タスクの変更後の内容
         conn = sqlite3.connect("asunaro.db")
         c = conn.cursor()
