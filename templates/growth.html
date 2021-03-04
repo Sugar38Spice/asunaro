@@ -22,19 +22,22 @@
 <div>
 	<img src="../static/img/teppen.PNG" >
 </div>
-<table border= "1px">
-   {% for post in post_list %}
-    
-    <tr>
-        <!-- <td>{{post.id}}</td>  -->
-		<td>{{post.posting}}</td>
-		<td><a href="/edit/{{post.id}}">編集</a></td>
-        <td><a href="/del/{{post.id}}">削除</a></td>
-       
-    </tr>
-	
-	{% endfor %}
-</table>
+<div >
+	<table border= "1px">
+		{% for post in post_list %}
+		 
+		 <tr >
+			 
+			 <!-- <td>{{post.id}}</td>  -->
+			 <td>{{post.posting}}</td>
+			 <td><a href="/edit/{{post.id}}">編集</a></td>
+			 <td><a href="/del/{{post.id}}">削除</a></td>
+			
+		 </tr>
+		 
+		 {% endfor %}
+	 </table>
+</div>
 <div>
 	<img src="../static/img/nemoto.PNG" >
 </div>
