@@ -56,7 +56,7 @@ def new_post():
 
 # GET  /login => ログイン画面を表示
 # POST /login => ログイン処理をする
-@app.route("/loginpage")
+@app.route("/login")
 def login2():
     if 'asunarostaff_id' in session :
         return redirect("/list")
@@ -191,7 +191,7 @@ def posting_list():
 
 
 
-    c.execute("SELECT * FROM posts_test")
+    c.execute("SELECT * FROM posts_test") # where asunarostaff_id = ?加える
     # 受け取ったデータの加工
     post_list = [] #空箱作ったよ
     # postという関数作った

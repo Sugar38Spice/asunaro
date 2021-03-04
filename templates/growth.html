@@ -15,7 +15,7 @@
 <h1>hello asunaro</h1>
 
 <h1>投稿一覧</h1>
-<h2>{{user_id}}さん、こんにちは</h2>
+<h2>{{name}}さん、こんにちは</h2>
 <h3>{{user_id}}さんのアスナロの木は高さ{{post_count[0]}}m!</h3>
 
 
@@ -26,7 +26,7 @@
    {% for post in post_list %}
     
     <tr>
-        <td>{{post.id}}</td> 
+        <!-- <td>{{post.id}}</td>  -->
 		<td>{{post.posting}}</td>
 		<td><a href="/edit/{{post.id}}">編集</a></td>
         <td><a href="/del/{{post.id}}">削除</a></td>
