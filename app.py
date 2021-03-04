@@ -67,7 +67,7 @@ def login2():
         # 存在するかを判定する。レコードが存在するとuser_idに整数が代入、存在しなければ nullが入る
         conn = sqlite3.connect('asunaro.db')
         c = conn.cursor()
-        c.execute("select id from asunarostaff where name = ? and password = ?", (name, password) )
+        c.execute("select ID from asunarostaff where name = ? and password = ?", (name, password) )
         user_id = c.fetchone()
         conn.close()
         
@@ -78,7 +78,7 @@ def login2():
             return render_template("login.html")
         else:
             session['asunarostaff_id'] = user_id[0]
-            return redirect("/index")
+            return redirect("/list")
 
 #ログアウトしますか？
 @app.route("/logout")
@@ -153,7 +153,7 @@ def post_get():
         return render_template("post.html")
 
 # どんな情報をとるの
-@app.route("/post" , methods= ["POST"])
+@app.route("/post")
 def add_post():
     # text.areaから投稿内容を取得
     posting = request.form.get("posting")  
@@ -168,31 +168,40 @@ def add_post():
     conn.close()
     return redirect("/list")
 
-# growth.htmlの投稿一覧
-@app.route("/list" )
+
+@app.route("/list" ,methods= ["GET"])
 def posting_list():
-    if 'user_id' in session :
-        user_id = session['user_id']
-        conn = sqlite3.connect('asunaro.db')
-        c = conn.cursor()
-        c.execute("SELECT user_id FROM posts_test where id = ?",(id,) )
+    conn = sqlite3.connect("asunaro.db")
+    c = conn.cursor()
+
+    c.execute("SELECT count (posting) FROM posts_test")
+    post_count = c.fetchone()
+    print(post_count) 
+
+
+
+    c.execute("SELECT * FROM posts_test")
     # 受け取ったデータの加工
-        post_list = [] #空箱作った
+    post_list = [] #空箱作ったよ
     # postという関数作った
-        for post in c.fetchall():
-            post_list.append(
-                {"id":post[0],"posting":post[1]}
-            )
-        conn.close()
-        print(post_list)
-        return  render_template("growth.html", post_list = post_list)
-    else:
-        return redirect("/login")
+    for post in c.fetchall():
+        post_list.append(
+            {"id":post[0],"posting":post[1]}
+        )
+    conn.close()
+    # print(post_list)
+    return  render_template("growth.html", post_list = post_list , post_count = post_count)
+
+
+
+
+
+
   
 #投稿内容の編集
 @app.route("/edit/<id>" , methods=["GET"])
 def edit(id):
-    if 'user_id' in session :
+    if 'asunarostaff_id' in session :
         conn = sqlite3.connect("asunaro.db")
         c = conn.cursor()
     # SQL文を実行してデータの参照
@@ -225,7 +234,7 @@ def edit_post():
 
 @app.route("/del/<id>")
 def del_task(id):
-    if 'user_id' in session :
+    if 'asunarostaff_id' in session :
         conn = sqlite3.connect("asunaro.db")
         c = conn.cursor()
         c.execute("DELETE FROM posts_test WHERE id = ?", (id,))
@@ -237,14 +246,14 @@ def del_task(id):
 
 @app.route("/regist", methods =["get"])
 def regist_get():
-    if "user_id" in session :
+    if "asunarostaff_id" in session :
         return render_template("/list")
     else:
         return  render_template("regist.html")
 
 @app.route("/regist", methods =["post"])
 def regist_post():
-    if "user_id" in session :
+    if "asunarostaff_id" in session :
         user_name = request.form.get("user_name")
         password = request.form.get("password")
         conn = sqlite3.connect("task.db")
