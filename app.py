@@ -168,11 +168,19 @@ def add_post():
     conn.close()
     return redirect("/list")
 
-# growth.htmlの投稿一覧
+# growth.htmlの投稿一覧・# 投稿数を表示
+
 @app.route("/list" )
 def posting_list():
     conn = sqlite3.connect("asunaro.db")
     c = conn.cursor()
+
+    c.execute("SELECT count (posting) FROM posts_test")
+    post_count = c.fetchone()
+    print(post_count) 
+
+
+
     c.execute("SELECT * FROM posts_test")
     # 受け取ったデータの加工
     post_list = [] #空箱作ったよ
@@ -182,9 +190,11 @@ def posting_list():
             {"id":post[0],"posting":post[1]}
         )
     conn.close()
-    print(post_list)
-    return  render_template("growth.html", post_list = post_list)
-  
+    # print(post_list)
+    return  render_template("growth.html", post_list = post_list , post_count = post_count)
+
+
+
 #投稿内容の編集
 @app.route("/edit/<id>" , methods=["GET"])
 def edit(id):
