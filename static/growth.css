@@ -11,6 +11,14 @@ header {
 	text-align: center;   /* 文字の中央揃え */
 }
 
+table  {
+	background-color: #F5F0D6;
+	margin-left: auto;
+	margin-right: auto;
+
+
+}
+
 body {
 /* フォントの指定 ゴシック体 ※やさしさゴシックは別途フォントデータのDLが必要なフォントのため、やわらかい印象のゴシック体を並べています */
 	font-family: "Noto Sans Japanese", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, "メイリオ", "Meiryo", "HGPｺﾞｼｯｸM", "Osaka", "ＭＳ Ｐゴシック", sans-serif, Century Gothic, Arial;
@@ -73,7 +81,7 @@ text-align: center;   /* 文字の中央揃え */
 	
 	/*ログアウト 背景色*/
 	#sp-fixed-menu li:last-of-type{
-		background: #EEF2EF;main
+		background: #EEF2EF;
 	}
 
   /* フッターメニューここまで */
