@@ -78,7 +78,9 @@ text-align: center;   /* 文字の中央揃え */
 
   /* フッターメニューここまで */
 
-	img {zoom:0.5;}
+	img {width:750px;
+		height:800px;
+		zoom:0.6;}
 
 /* 画像に雨が降るCSSアニメーションここから */
 body{
@@ -92,9 +94,7 @@ body{
 	overflow: hidden;
   }
   
-  .container img{
-	width: 100%;
-  }
+ 
   
   
   .rains{
@@ -113,7 +113,9 @@ body{
 	opacity:0.4;
   }
   
-  
+  .container img{
+		width: 100%;
+		}
   
    /*
   雨の初期位置とアニメーション指定
