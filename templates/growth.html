@@ -16,8 +16,10 @@
 
 <h1>投稿一覧</h1>
 <h2>{{user_id}}さん、こんにちは</h2>
+<h3>{{user_id}}さんのアスナロの木は高さ{{post_count[0]}}m!</h3>
 <table border= "1px">
    {% for post in post_list %}
+    
     <tr>
         <td>{{post.id}}</td> 
 		<td>{{post.posting}}</td>
@@ -25,9 +27,11 @@
         <td><a href="/del/{{post.id}}">削除</a></td>
        
     </tr>
+	
 	{% endfor %}
-
 </table>
+
+
 <a href="/post">投稿を追加</a>
 <a href="/logout">ログアウト</a>
 
