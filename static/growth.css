@@ -12,7 +12,8 @@ header {
 }
 
 table  {
-	background-color: #F5F0D6;
+	background: #F5F0D6;  
+	background-color: ;
 	margin-left: auto;
 	margin-right: auto;
 
