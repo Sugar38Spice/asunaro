@@ -11,7 +11,10 @@ header {
 	text-align: center;   /* 文字の中央揃え */
 }
 
-
+table  {
+	background-color: #F5F0D6;
+	margin-left: auto;
+	margin-right: auto;
 
 
 }
