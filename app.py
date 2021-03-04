@@ -175,7 +175,7 @@ def posting_list():
     c = conn.cursor()
     c.execute("SELECT * FROM posts_test")
     # 受け取ったデータの加工
-    post_list = [] #空箱作った
+    post_list = [] #空箱作ったよ
     # postという関数作った
     for post in c.fetchall():
         post_list.append(
