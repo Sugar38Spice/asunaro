@@ -12,9 +12,9 @@ def index():
     return render_template("index.html")
 
 # index→loginページ遷移
-@app.route("/login",methods=["POST"])
-def login():
-    return redirect("/login")
+# @app.route("/login",methods=["POST"])
+# def login():
+#     return redirect("/login")
 
 
 
@@ -169,29 +169,32 @@ def add_post():
     return redirect("/list")
 
 
-@app.route("/list" ,methods= ["GET"])
+@app.route("/list")
 def posting_list():
-    conn = sqlite3.connect("asunaro.db")
-    c = conn.cursor()
+    if "asunarostaff_id" in session :
+        user_id = session["asunarostaff_id"]
+        conn = sqlite3.connect("asunaro.db")
+        c = conn.cursor()
 
-    c.execute("SELECT count (posting) FROM posts_test")
-    post_count = c.fetchone()
-    print(post_count) 
+        c.execute("SELECT count (posting) FROM posts_test")
+        post_count = c.fetchone()
+        print(post_count) 
 
 
 
-    c.execute("SELECT * FROM posts_test")
+        c.execute("SELECT * FROM posts_test WHERE asunarostaff_id = ?;" ,(user_id,))
     # 受け取ったデータの加工
-    post_list = [] #空箱作ったよ
+        post_list = [] #空箱作ったよ
     # postという関数作った
-    for post in c.fetchall():
-        post_list.append(
-            {"id":post[0],"posting":post[1]}
-        )
-    conn.close()
+        for post in c.fetchall():
+            post_list.append(
+                {"id":post[0],"posting":post[1]}
+            )
+        conn.close()
     # print(post_list)
-    return  render_template("growth.html", post_list = post_list , post_count = post_count)
-
+        return  render_template("growth.html", post_list = post_list , post_count = post_count)
+    else:
+        return redirect("/login")
 
 
 
@@ -202,6 +205,7 @@ def posting_list():
 @app.route("/edit/<id>" , methods=["GET"])
 def edit(id):
     if 'asunarostaff_id' in session :
+    
         conn = sqlite3.connect("asunaro.db")
         c = conn.cursor()
     # SQL文を実行してデータの参照
@@ -274,11 +278,11 @@ def regist_post():
 
 # @app.route("/login", methods =["post"])
 # def login_posting():
-#     user_name = request.form.get("user_name")
+#     name = request.form.get("name")
 #     password = request.form.get("password")
-#     conn = sqlite3.connect("task.db")
+#     conn = sqlite3.connect("asunaro.db")
 #     c = conn.cursor()
-#     c.execute("SELECT id FROM users WHERE user_name = ? and password = ?", (user_name, password) )
+#     c.execute("SELECT id FROM users WHERE name = ? and password = ?", (name, password) )
 #     user_id = c.fetchone()
 
 #     conn.close()
@@ -294,8 +298,8 @@ def regist_post():
 
 
 #@app.route("/logout", methods =["get"])
-#def logout():
-    session.pop("user_id",None)
+def logout():
+    session.pop("asunarostaff_id",None)
     return  render_template("login.html")
 
 
