@@ -19,9 +19,7 @@ table  {
  
 }
 
-table tr:nth-child(odd) td {
-	background-image: url(../static/img/kino_kasa.PNG);
-}
+
 
 body {
 /* フォントの指定 ゴシック体 ※やさしさゴシックは別途フォントデータのDLが必要なフォントのため、やわらかい印象のゴシック体を並べています */

@@ -19,26 +19,31 @@ def login():
 
 
 
-@app.route('/new',methods=["GET", "POST"])
+@app.route('/new',methods=["GET"])
 def new():
-    if request.method == "GET":
-        if 'asunarostaff_id' in session :
-            return redirect ('/login')
-        else:
-            return render_template("new.html")
+    #if request.method == "GET":
+    if 'asunarostaff_id' in session :
+        print("test1")
+        return redirect ('/login')
+    else:
+        return render_template("new.html")
 
     #print(name)
     #print(password)        
 
-    else:
-        name = request.form.get("name")
-        password = request.form.get("password")
-        conn = sqlite3.connect('asunaro.db')
-        c = conn.cursor()
-        c.execute("insert into asunarostaff values(null,?,?)", (name,password))
-        conn.commit()
-        conn.close()
-        return redirect('/login')
+@app.route('/new',methods=["POST"])
+def new_post():
+    print("test2")
+    name = request.form.get("name")
+    password = request.form.get("password")
+    print(name)
+    print(password)
+    conn = sqlite3.connect('asunaro.db')
+    c = conn.cursor()
+    c.execute("insert into asunarostaff values(null,?,?)", (name,password))
+    conn.commit()
+    conn.close()
+    return redirect('/login')
 
 
 
@@ -51,35 +56,39 @@ def new():
 
 # GET  /login => ログイン画面を表示
 # POST /login => ログイン処理をする
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login")
 def login2():
-    if request.method == "GET":
-        if 'asunarostaff_id' in session :
-            return redirect("/list")
-        else:
-            return render_template("login.html")
+    if 'asunarostaff_id' in session :
+        return redirect("/list")
     else:
-        # ブラウザから送られてきたデータを受け取る
-        name = request.form.get("name")
-        password = request.form.get("password")
-
-        # ブラウザから送られてきた name ,password を userテーブルに一致するレコードが
-        # 存在するかを判定する。レコードが存在するとuser_idに整数が代入、存在しなければ nullが入る
-        conn = sqlite3.connect('asunaro.db')
-        c = conn.cursor()
-        c.execute("select id from asunarostaff where name = ? and password = ?", (name, password) )
-        user_id = c.fetchone()
-        conn.close()
+        return render_template("login.html")
+   
         
-        #print(type(asunarostaff_id))
-        # user_id が NULL(PythonではNone)じゃなければログイン成功
-        if user_id is None:
-            # ログイン失敗すると、ログイン画面に戻す
-            return render_template("login.html")
-        else:
-            session['asunarostaff_id'] = user_id[0]
-            return redirect("index.html")
 
+@app.route("/path", methods=["POST"])
+def login_post():
+    print("loginpost")
+    # ブラウザから送られてきたデータを受け取る
+    name = request.form.get("name")
+    password = request.form.get("password")
+
+    # ブラウザから送られてきた name ,password を userテーブルに一致するレコードが
+    # 存在するかを判定する。レコードが存在するとuser_idに整数が代入、存在しなければ nullが入る
+    conn = sqlite3.connect('asunaro.db')
+    c = conn.cursor()
+    c.execute("select id from asunarostaff where name = ? and password = ?", (name, password) )
+    user_id = c.fetchone()
+    conn.close()
+    print("test")
+    #print(type(asunarostaff_id))
+    # user_id が NULL(PythonではNone)じゃなければログイン成功
+    if user_id is None:
+        # ログイン失敗すると、ログイン画面に戻す
+        return render_template("login.html")
+    else:
+        print(user_id)
+        session['asunarostaff_id'] = user_id[0]
+        return redirect("/list")
 
 @app.route("/logout")
 def logout():
@@ -157,11 +166,12 @@ def post_get():
 def add_post():
     # text.areaから投稿内容を取得
     posting = request.form.get("posting")  
+    user_id = session['asunarostaff_id']
     # 投稿内容を保存するDBを指定
     conn = sqlite3.connect("asunaro.db")
     c = conn.cursor()
     # SQL文で情報（ID,投稿内容,日時,ユーザーID）を取得
-    c.execute('INSERT INTO posts_test VALUES(null,?);' , (posting,))
+    c.execute('INSERT INTO posts_test VALUES(null,?,?);' , (posting,user_id))
     # 投稿完了(悲観ロックなので)
     conn.commit()
     # DB接続終了
@@ -181,7 +191,7 @@ def posting_list():
 
 
 
-    c.execute("SELECT * FROM posts_test")
+    c.execute("SELECT * FROM posts_test") # where asunarostaff_id = ?加える
     # 受け取ったデータの加工
     post_list = [] #空箱作ったよ
     # postという関数作った
