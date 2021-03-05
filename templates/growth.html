@@ -15,25 +15,24 @@
 <h1>hello asunaro</h1>
 
 <h1>投稿一覧</h1>
-<h2>{{name}}さん、こんにちは</h2>
-<h3>{{user_id}}さんのアスナロの木は高さ{{post_count[0]}}m!</h3>
+<h2>こんにちは</h2>
+<h3>あなたのアスナロの木は高さ{{post_count[0]}}m!</h3>
 
 
 <div>
 	<img src="../static/img/teppen.PNG" >
 </div>
 <div >
-	<table border= "1px">
+	<table class="kasa" border= "1px">
 		{% for post in post_list %}
 		 
-		 <tr >
-			 
+		 
+			<img src="../static/img/kino_kasa.PNG" alt="">
 			 <!-- <td>{{post.id}}</td>  -->
-			 <td>{{post.posting}}</td>
-			 <td><a href="/edit/{{post.id}}">編集</a></td>
-			 <td><a href="/del/{{post.id}}">削除</a></td>
+			 <p>{{post.posting}}<a href="/edit/{{post.id}}">編集</a><a href="/del/{{post.id}}">削除</a></p>
 			
-		 </tr>
+			
+		 
 		 
 		 {% endfor %}
 	 </table>
