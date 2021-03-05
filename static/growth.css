@@ -92,3 +92,40 @@ text-align: center;   /* 文字の中央揃え */
 
   /* フッターメニューここまで */
 
+  /* リストの下に画像を表示 */
+  #listbox {
+    position: relative;
+     > img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+}
+#listbox {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: rgba(245,245,245,0.5);
+    > div {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        font-size: 1rem;
+        line-height: 1.7;
+        padding: 20px 0;
+    }
+}
+ 
+@media only screen and (max-width: 480px) {
+    #listbox {
+        overflow: scroll;
+    }
+    #listbox-in {
+        width: 100%;
+    }  
+}
+
+/* ここまで */
