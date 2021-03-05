@@ -311,7 +311,7 @@ def regist_post():
 
 @app.errorhandler(404)
 def notfound(code):
-    return "404エラーです。このページはすでに消されてしまったか存在していません。"
+    return render_template("error.html")
 
 
 
