@@ -92,3 +92,14 @@ text-align: center;   /* 文字の中央揃え */
 
   /* フッターメニューここまで */
 
+.kasa{
+	/* position: relative; */
+}
+
+.kasa p{
+	/* position:absolute;
+	top:10px; */
+	background: url(../static/img/kino_kasa.PNG) no-repeat center center;
+	height: 400px;
+	background-size: cover;
+}
